@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas width="200" height="200" style="border:1px solid black">
+		您的浏览器不支持canvas。
+	</canvas>
+	<select name="" id="">
+		<option value="1">1</option>
+		<option value="5">2</option>
+		<option value="15">3</option>
+	</select>
+	<input type="color">
+</body>
+<script type="text/javascript">
+	var input=document.getElementsByTagName("input")[0];
+	var select=document.getElementsByTagName("select")[0];
+	var canvas=document.getElementsByTagName("canvas")[0];
+	var content=canvas.getContext("2d");
+	var lineW=1;
+	// content.beginPath();
+	// content.moveTo(100,5);
+	// content.lineTo(5,195);
+	// content.lineTo(195,195);
+	// content.stroke();
+	// content.closePath();
+	// content.lineWidth=10;
+	// content.strokeStyle="red";
+	select.onchange=function(){
+		console.log(this.value);
+		lineW=this.value;
+	}
+	canvas.onmousedown=function(e){
+		e=e||window.event;
+		var moveStartX=e.clientX;
+		var moveStartY=e.clientY;
+		content.beginPath();
+	console.log(input.value);
+	content.lineWidth=lineW;
+		// content.strokeStyle="red";
+		content.strokeStyle=input.value;
+		// ontent.lineWidth=select.value;
+		content.moveTo(moveStartX,moveStartY);
+		canvas.onmousemove=function(e){
+			e=e||window.event;
+			var moveX=e.clientX;
+			var moveY=e.clientY;
+			// console.log("moveX"+moveX);
+			// console.log("moveY"+moveY);
+			content.lineTo(moveX,moveY);
+			content.stroke();
+		}
+	}
+	canvas.onmouseup=function(e){
+		e=e||window.event;
+		canvas.onmousemove=null;
+		content.closePath();
+	}
+	// content.beginPath();
+</script>
+</html>
